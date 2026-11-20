@@ -3,9 +3,8 @@
   // so the parent receives only the normalized fields it needs for its cards.
   if (window.parent === window || window.origin !== 'null') return;
 
-  const params = new URLSearchParams(location.search);
-  const sport = params.get('sport');
-  const dates = (params.get('dates') || '').split(',').filter(date => /^\d{4}-\d{2}-\d{2}$/.test(date));
+  const { sport, dates: dateList = '' } = document.documentElement.dataset;
+  const dates = dateList.split(',').filter(date => /^\d{4}-\d{2}-\d{2}$/.test(date));
   const calendar = new Intl.DateTimeFormat('sv-SE', { timeZone: 'Asia/Shanghai', dateStyle: 'short' });
   const stateNames = ['', '第一节', '第一节结束', '第二节', '半场', '第三节', '第三节结束', '第四节',
     '第四节结束', '完场', '加时', '加时完场', '中断', '取消', '延期', '腰斩', '待定'];

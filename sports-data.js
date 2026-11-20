@@ -4,7 +4,13 @@
   const sports = new Set(['football', 'basketball']);
   const schedules = new Map();
   const savedSchedules = new Map();
-  const feedPage = new URL('sports-feed.html', document.currentScript.src);
+  const feedScript = new URL('sports-feed.js', document.currentScript.src);
+  const footballScript = new URL('sports-football-feed.js', document.currentScript.src);
+  const feedSources = [
+    feedScript.origin,
+    'https://js-basket.7m.com.cn', 'https://bdata.7m.com.cn',
+    'https://js-live.7m.com.cn', 'https://ctc-live.7m.com.cn',
+  ].join(' ');
   const halfHour = 30 * 60 * 1000;
 
   const aliases = [
@@ -195,12 +201,18 @@
   function requestScores(sport, dates) {
     return new Promise(resolve => {
       const frame = document.createElement('iframe');
-      const url = new URL(feedPage);
-      url.search = new URLSearchParams({ sport, dates: dates.join(',') });
       frame.title = '7M 比分数据';
       frame.setAttribute('sandbox', 'allow-scripts');
       frame.hidden = true;
-      frame.src = url.href;
+      const footballLoader = sport === 'football' ? `<script src="${footballScript.href}" defer></script>` : '';
+      // Starting the sandbox inline avoids a separate Pages document request on each refresh.
+      frame.srcdoc = `<!doctype html>
+        <html lang="zh-CN" data-sport="${sport}" data-dates="${dates.join(',')}">
+        <meta charset="utf-8">
+        <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src ${feedSources}; base-uri 'none'; form-action 'none'">
+        <title>7M 比分数据</title>
+        ${footballLoader}
+        <script src="${feedScript.href}" defer></script>`;
 
       function complete(result) {
         clearTimeout(timeout);
@@ -215,7 +227,7 @@
         complete({ matches: event.data.matches, ok: event.data.ok === true });
       }
 
-      const timeout = setTimeout(() => complete({ matches: [], ok: false }), 8500);
+      const timeout = setTimeout(() => complete({ matches: [], ok: false }), 14_000);
       window.addEventListener('message', receive);
       document.body.append(frame);
     });
