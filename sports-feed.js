@@ -1,6 +1,8 @@
 (() => {
   // This document runs in an opaque-origin sandbox. The provider sends scripts,
   // so the parent receives only the normalized fields it needs for its cards.
+  if (window.parent === window || window.origin !== 'null') return;
+
   const params = new URLSearchParams(location.search);
   const sport = params.get('sport');
   const dates = (params.get('dates') || '').split(',').filter(date => /^\d{4}-\d{2}-\d{2}$/.test(date));
