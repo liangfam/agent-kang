@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#17242d">
+  <title>网盘 · Agent-Kang</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="sections.css">
+  <script src="wallpaper.js" defer></script>
+  <script src="sections.js" defer></script>
+</head>
+<body class="subpage page-drive" data-page="drive">
+  <img class="wallpaper" src="media/drive.jpg" alt="" fetchpriority="high">
+  <div class="wallpaper-shade" aria-hidden="true"></div>
+  <a class="skip-link" href="#main">跳到正文</a>
+  <header class="section-header">
+    <div class="site-width section-nav">
+      <a class="site-brand" href="index.html" aria-label="Agent-Kang 首页">Agent-Kang</a>
+      <nav aria-label="网站列表"><a href="blog.html">博客</a><a href="drive.html" aria-current="page">网盘</a><a href="music.html">音乐</a><a href="sports.html">体育</a><a href="links.html">网址集</a><a href="trending.html">今日热榜</a></nav>
+    </div>
+  </header>
+
+  <main id="main" class="site-width page-main">
+    <header class="page-intro">
+      <h1>网盘</h1>
+      <p>整理网盘分享链接，按名称和分类查找资料。</p>
+    </header>
+    <div class="page-content">
+      <section class="glass panel catalog-panel" aria-labelledby="drive-title" data-catalog="drive">
+        <div class="panel-heading">
+          <h2 id="drive-title">资料库</h2>
+          <button type="button" class="action" id="drive-add">添加资源</button>
+        </div>
+        <div class="filters"><label class="visually-hidden" for="drive-search">搜索资源</label>
+          <input id="drive-search" type="search" placeholder="搜索资源">
+          <label class="visually-hidden" for="drive-filter">筛选分类</label>
+          <select id="drive-filter"><option value="">全部分类</option><option>文档</option><option>影音</option><option>工具</option><option>其他</option></select></div>
+        <div class="resource-list" id="drive-items" aria-live="polite"></div>
+        <p class="helper" id="drive-status" role="status"></p>
+      </section>
+      <dialog class="detail editor" id="drive-form-dialog" aria-labelledby="drive-form-title">
+        <form id="drive-form">
+          <h2 id="drive-form-title">添加资源</h2>
+          <label>名称<input name="title" type="text" required maxlength="80" autofocus></label>
+          <label>网盘分享链接<input name="url" type="url" placeholder="https://" required maxlength="1000"></label>
+          <label>分类<select name="category"><option>文档</option><option>影音</option><option>工具</option><option>其他</option></select></label>
+          <p id="drive-form-error" class="helper" role="alert"></p>
+          <div class="form-actions">
+            <button class="pill" type="button" id="drive-cancel">取消</button>
+            <button class="action" type="submit">保存资源</button>
+          </div>
+        </form>
+      </dialog>
+    </div>
+  </main>
+
+</body>
+</html>

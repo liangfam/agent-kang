@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#17242d">
+  <title>音乐 · Agent-Kang</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="sections.css">
+  <script src="wallpaper.js" defer></script>
+  <script src="sections.js" defer></script>
+</head>
+<body class="subpage page-music" data-page="music">
+  <img class="wallpaper" src="media/music.jpg" alt="" fetchpriority="high">
+  <div class="wallpaper-shade" aria-hidden="true"></div>
+  <a class="skip-link" href="#main">跳到正文</a>
+  <header class="section-header">
+    <div class="site-width section-nav">
+      <a class="site-brand" href="index.html" aria-label="Agent-Kang 首页">Agent-Kang</a>
+      <nav aria-label="网站列表"><a href="blog.html">博客</a><a href="drive.html">网盘</a><a href="music.html" aria-current="page">音乐</a><a href="sports.html">体育</a><a href="links.html">网址集</a><a href="trending.html">今日热榜</a></nav>
+    </div>
+  </header>
+
+  <main id="main" class="site-width page-main">
+    <header class="page-intro">
+      <h1>音乐</h1>
+      <p>导入本地音乐，顺着自己的歌单听。</p>
+    </header>
+    <div class="page-content">
+      <div class="music-layout">
+        <section class="glass panel player" aria-labelledby="player-title">
+          <div class="panel-heading"><h2 id="player-title">正在播放</h2></div>
+          <div class="record" aria-hidden="true"><span>♫</span></div>
+          <p class="track-title" id="track-title">还没有选择歌曲</p>
+          <p class="helper" id="player-status" role="status">选择音频文件后，就可以在这里播放。</p>
+          <audio id="audio" controls preload="metadata" aria-label="音频播放器" hidden></audio>
+          <div class="transport" id="transport" hidden>
+            <button class="pill" type="button" id="prev-track">上一首</button>
+            <button class="pill" type="button" id="next-track">下一首</button>
+          </div>
+        </section>
+        <section class="glass panel queue" aria-labelledby="queue-title">
+          <div class="panel-heading"><h2 id="queue-title">播放列表</h2></div>
+          <label for="music-files" class="visually-hidden">导入本地音乐</label>
+          <input id="music-files" type="file" accept="audio/*,.mp3,.wav,.m4a,.flac,.ogg,.aac" multiple>
+          <p class="empty" id="queue-empty">播放列表为空。</p>
+          <ol class="queue-list" id="queue-list"></ol>
+        </section>
+      </div>
+    </div>
+  </main>
+
+</body>
+</html>

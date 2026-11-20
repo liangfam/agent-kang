@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#17242d">
+  <title>体育 · Agent-Kang</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="sections.css">
+  <script src="wallpaper.js" defer></script>
+  <script src="sections.js" defer></script>
+</head>
+<body class="subpage page-sports" data-page="sports">
+  <img class="wallpaper" src="media/sports.jpg" alt="" fetchpriority="high">
+  <div class="wallpaper-shade" aria-hidden="true"></div>
+  <a class="skip-link" href="#main">跳到正文</a>
+  <header class="section-header">
+    <div class="site-width section-nav">
+      <a class="site-brand" href="index.html" aria-label="Agent-Kang 首页">Agent-Kang</a>
+      <nav aria-label="网站列表"><a href="blog.html">博客</a><a href="drive.html">网盘</a><a href="music.html">音乐</a><a href="sports.html" aria-current="page">体育</a><a href="links.html">网址集</a><a href="trending.html">今日热榜</a></nav>
+    </div>
+  </header>
+
+  <main id="main" class="site-width page-main">
+    <header class="page-intro">
+      <h1>体育</h1>
+      <p>看比分，也看场内外的热点。</p>
+    </header>
+    <div class="page-content">
+      <div class="panel-grid sports-layout">
+        <section class="glass panel" aria-labelledby="scores-title">
+          <div class="panel-heading"><h2 id="scores-title">比分</h2><span class="tag">示例数据</span></div>
+          <label class="visually-hidden" for="score-filter">运动分类</label>
+          <select id="score-filter"><option value="">全部运动</option><option>足球</option><option>篮球</option></select>
+          <div id="scores" class="score-list"></div>
+          <a class="score-live" href="https://www.nba.com/games" target="_blank" rel="noopener noreferrer">查看 NBA 官方比分</a>
+        </section>
+        <section class="glass panel" aria-labelledby="sports-news-title">
+          <div class="panel-heading"><h2 id="sports-news-title">体育热点</h2></div>
+          <div class="source-list">
+            <a class="source" href="https://sports.cctv.com/" target="_blank" rel="noopener noreferrer"><strong>央视体育</strong><span>综合赛事与体育新闻</span></a>
+            <a class="source" href="https://www.nba.com/news" target="_blank" rel="noopener noreferrer"><strong>NBA 官方资讯</strong><span>联盟新闻与比赛看点</span></a>
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+
+</body>
+</html>

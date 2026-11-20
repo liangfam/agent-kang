@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#17242d">
+  <title>Agent-Kang · 个人主页</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="wallpaper.js" defer></script>
+  <script src="homepage.js" defer></script>
+</head>
+<body class="hub">
+  <video id="wallpaper" class="wallpaper" src="background.mp4" muted loop playsinline preload="auto" aria-hidden="true"></video>
+  <div class="wallpaper-shade" aria-hidden="true"></div>
+  <a class="skip-link" href="#main">跳到正文</a>
+
+  <main id="main" class="shell home">
+    <section class="intro" aria-labelledby="intro-title">
+      <h1 id="intro-title" class="signature">Agent-Kang</h1>
+      <p class="intro-lead">欢迎来到康康的<span class="world">world</span></p>
+      <section class="contact" aria-labelledby="contact-title">
+        <h2 id="contact-title">联系方式</h2>
+        <div class="contact-buttons">
+          <button class="social wechat" type="button" data-contact="wechat" aria-label="微信" title="微信"><span class="chat-icon" aria-hidden="true"><i></i><i></i></span></button>
+          <button class="social qq" type="button" data-contact="qq" aria-label="QQ" title="QQ"><span class="penguin-icon" aria-hidden="true"><i></i></span></button>
+          <button class="social alipay" type="button" data-contact="alipay" aria-label="支付宝" title="支付宝"><span aria-hidden="true">支</span></button>
+          <button class="social douyin" type="button" data-contact="douyin" aria-label="抖音" title="抖音"><span aria-hidden="true">♪</span></button>
+        </div>
+      </section>
+    </section>
+
+    <div class="dashboard">
+      <div class="glass clock">
+        <time class="clock-time" id="clock-time"></time>
+        <time class="clock-date" id="clock-date"></time>
+      </div>
+
+      <nav class="glass projects" aria-labelledby="sites-title">
+        <h2 id="sites-title">网站列表</h2>
+        <div class="project-grid">
+          <a class="project" href="blog.html"><span class="project-icon icon-blog" aria-hidden="true">✎</span><span>博客</span></a>
+          <a class="project" href="drive.html"><span class="project-icon icon-drive" aria-hidden="true">▰</span><span>网盘</span></a>
+          <a class="project" href="music.html"><span class="project-icon icon-music" aria-hidden="true">♫</span><span>音乐</span></a>
+          <a class="project" href="sports.html"><span class="project-icon icon-sports" aria-hidden="true">⚽︎</span><span>体育</span></a>
+          <a class="project" href="links.html"><span class="project-icon icon-links" aria-hidden="true">⛓︎</span><span>网址集</span></a>
+          <a class="project" href="trending.html"><span class="project-icon icon-trending" aria-hidden="true">♨︎</span><span>今日热榜</span></a>
+        </div>
+      </nav>
+    </div>
+  </main>
+
+  <footer class="shell controls"><button class="pill playback" id="playback" type="button">
+      <span class="playback-icon" aria-hidden="true"></span>
+      <span id="playback-label">播放背景</span>
+    </button></footer>
+
+  <dialog class="detail" id="contact-dialog" aria-labelledby="contact-name">
+    <form method="dialog"><button class="pill close-detail" type="submit" autofocus>关闭</button></form>
+    <h2 id="contact-name"></h2>
+    <p id="contact-value"></p>
+  </dialog>
+</body>
+</html>
