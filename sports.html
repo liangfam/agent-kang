@@ -3,12 +3,13 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#17242d">
+  <meta name="theme-color" content="#101922">
   <title>体育 · Agent-Kang</title>
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="sections.css">
-  <script src="wallpaper.js" defer></script>
-  <script src="sections.js" defer></script>
+  <link rel="stylesheet" href="sports.css">
+  <script src="sports-data.js" defer></script>
+  <script src="sports.js" defer></script>
 </head>
 <body class="subpage page-sports" data-page="sports">
   <img class="wallpaper" src="media/sports.jpg" alt="" fetchpriority="high">
@@ -21,28 +22,70 @@
     </div>
   </header>
 
-  <main id="main" class="site-width page-main">
-    <header class="page-intro">
-      <h1>体育</h1>
-      <p>看比分，也看场内外的热点。</p>
+  <main id="main" class="site-width sports-main">
+    <header class="sports-hero">
+      <h1>体育<span>赛场</span></h1>
+      <p>每日体彩赛程 · 7M 实时比分</p>
     </header>
-    <div class="page-content">
-      <div class="panel-grid sports-layout">
-        <section class="glass panel" aria-labelledby="scores-title">
-          <div class="panel-heading"><h2 id="scores-title">比分</h2><span class="tag">示例数据</span></div>
-          <label class="visually-hidden" for="score-filter">运动分类</label>
-          <select id="score-filter"><option value="">全部运动</option><option>足球</option><option>篮球</option></select>
-          <div id="scores" class="score-list"></div>
-          <a class="score-live" href="https://www.nba.com/games" target="_blank" rel="noopener noreferrer">查看 NBA 官方比分</a>
-        </section>
-        <section class="glass panel" aria-labelledby="sports-news-title">
-          <div class="panel-heading"><h2 id="sports-news-title">体育热点</h2></div>
-          <div class="source-list">
-            <a class="source" href="https://sports.cctv.com/" target="_blank" rel="noopener noreferrer"><strong>央视体育</strong><span>综合赛事与体育新闻</span></a>
-            <a class="source" href="https://www.nba.com/news" target="_blank" rel="noopener noreferrer"><strong>NBA 官方资讯</strong><span>联盟新闻与比赛看点</span></a>
+
+    <div class="sports-layout">
+      <section class="sports-sheet" aria-labelledby="scores-title">
+        <div class="sports-board-header">
+          <div>
+            <h2 id="scores-title">比赛看板</h2>
+            <p>北京时间 · 按体彩比赛日显示</p>
           </div>
+          <div class="sports-sport-switch" role="group" aria-label="选择运动">
+            <button type="button" data-sport="football" aria-pressed="true">足球</button>
+            <button type="button" data-sport="basketball" aria-pressed="false">篮球</button>
+          </div>
+        </div>
+
+        <div class="sports-date-bar">
+          <div class="sports-date" role="group" aria-label="选择比赛日">
+            <button class="sports-icon-button" id="sports-prev" type="button" aria-label="前一天" title="前一天">
+              <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="m15 5-7 7 7 7"/></svg>
+            </button>
+            <time id="sports-date" aria-live="polite">今天</time>
+            <button class="sports-icon-button" id="sports-next" type="button" aria-label="后一天" title="后一天">
+              <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="m9 5 7 7-7 7"/></svg>
+            </button>
+          </div>
+          <button class="sports-plain-button" type="button" id="sports-today">回到今天</button>
+        </div>
+
+        <div class="sports-toolbar">
+          <div class="sports-filters" role="group" aria-label="比赛状态">
+            <button type="button" aria-pressed="true" data-state="all">全部<span aria-hidden="true">—</span></button>
+            <button type="button" aria-pressed="false" data-state="live">进行中<span aria-hidden="true">—</span></button>
+            <button type="button" aria-pressed="false" data-state="scheduled">未开赛<span aria-hidden="true">—</span></button>
+            <button type="button" aria-pressed="false" data-state="final">已完赛<span aria-hidden="true">—</span></button>
+          </div>
+          <button class="sports-plain-button sports-refresh" type="button" id="sports-refresh">
+            <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M20 11a8 8 0 1 0-2 6m2-12v6h-6"/></svg><span>刷新</span>
+          </button>
+        </div>
+
+        <p id="sports-status" class="sports-status" role="status">正在加载体彩赛程…</p>
+        <div id="sports-results" class="sports-results" aria-busy="true">
+          <ul id="sports-matches" class="sports-matches" aria-label="比赛列表" hidden></ul>
+          <p class="sports-empty" id="sports-empty">正在获取比赛，请稍候。</p>
+        </div>
+        <noscript><p class="sports-empty">请启用 JavaScript，或通过数据来源查看原站比赛。</p></noscript>
+      </section>
+
+      <aside class="sports-aside" aria-label="体育资讯与数据来源">
+        <section class="sports-sheet sports-side-panel" aria-labelledby="sports-news-title">
+          <h2 id="sports-news-title">体育热点</h2>
+          <a class="sports-source" href="https://sports.cctv.com/" target="_blank" rel="noopener noreferrer"><span><strong>央视体育</strong><small>赛事与体育新闻</small></span><span aria-hidden="true">↗</span></a>
+          <a class="sports-source" href="https://www.nba.com/news" target="_blank" rel="noopener noreferrer"><span><strong>NBA 官方资讯</strong><small>联盟新闻与比赛看点</small></span><span aria-hidden="true">↗</span></a>
         </section>
-      </div>
+        <section class="sports-sheet sports-side-panel" aria-labelledby="sports-source-title">
+          <h2 id="sports-source-title">数据来源</h2>
+          <a class="sports-source" id="sports-schedule-source" href="https://www.sporttery.cn/jc/zqbfzb/" target="_blank" rel="noopener noreferrer"><span><strong>中国体彩网</strong><small>竞彩场次与开赛时间</small></span><span aria-hidden="true">↗</span></a>
+          <a class="sports-source" id="sports-score-source" href="https://bf.7m.com.cn/" target="_blank" rel="noopener noreferrer"><span><strong>7M 体育</strong><small>实时比分与赛况</small></span><span aria-hidden="true">↗</span></a>
+        </section>
+      </aside>
     </div>
   </main>
 
