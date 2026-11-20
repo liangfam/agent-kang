@@ -15,6 +15,7 @@
   }
 
   function playWallpaper() {
+    if (!wallpaper.hasAttribute('src')) wallpaper.src = wallpaper.dataset.videoSrc;
     wallpaper.play().catch(updatePlayback);
   }
 
@@ -30,5 +31,10 @@
   });
 
   updatePlayback();
-  if (!reduceMotion.matches && !wallpaper.error) playWallpaper();
+  window.addEventListener('load', () => {
+    // Let the first screen paint before the video competes for bandwidth.
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      if (!reduceMotion.matches && !wallpaper.hasAttribute('src')) playWallpaper();
+    }));
+  }, { once: true });
 })();
