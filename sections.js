@@ -160,6 +160,8 @@ function setupCatalog(id) {
   const error = byId(id + '-form-error');
   const categories = [...form.elements.category.options].map(option => option.value);
   const isDrive = id === 'drive';
+  const additions = typeof additionalBookmarks === 'undefined' ? [] : additionalBookmarks;
+  const presets = isDrive ? [] : [...starterLinks, ...additions].map(item => ({ ...item, preset: true }));
   const type = isDrive ? '资源' : '网址';
   const key = 'agent-kang-' + id + '-v1';
   let storageAvailable = true;
@@ -190,17 +192,22 @@ function setupCatalog(id) {
 
   function render() {
     const term = search.value.trim().toLowerCase();
-    const all = isDrive ? entries : [...entries, ...starterLinks.map(item => ({...item, example: true}))];
+    const savedAddresses = new Set(entries.map(item => webAddress(item.url).href));
+    const all = [...entries, ...presets.filter(item => !savedAddresses.has(webAddress(item.url).href))];
     const visible = all.filter(item =>
       (!filter.value || item.category === filter.value) &&
-      [item.title, item.url, item.category].some(text => text.toLowerCase().includes(term))
+      [item.title, item.url, item.category, item.description].some(text =>
+        typeof text === 'string' && text.toLowerCase().includes(term))
     );
     list.replaceChildren(...visible.map(item => {
       const card = element('article', isDrive ? 'resource' : 'bookmark');
       const link = externalLink(item.url, 'saved-link', item.title);
+      if (typeof item.description === 'string' && item.description) {
+        link.append(element('span', 'link-meta', item.description));
+      }
       link.append(element('span', 'link-meta', item.category + ' · ' + new URL(item.url).hostname));
       card.append(link);
-      if (!item.example) {
+      if (!item.preset) {
         const remove = element('button', 'remove-link', '移除');
         remove.type = 'button';
         remove.setAttribute('aria-label', '移除' + item.title);
@@ -216,7 +223,7 @@ function setupCatalog(id) {
     }));
 
     const base = visible.length
-      ? visible.length + ' 个' + type + (visible.some(item => item.example) ? '，含示例网址' : '')
+      ? visible.length + ' 个' + type
       : all.length ? '没有找到符合条件的' + type + '。' : '还没有资源。可以添加网盘分享链接。';
     status.textContent = storageAvailable ? base : base + ' 当前浏览器仅能在本次打开期间保留更改。';
   }

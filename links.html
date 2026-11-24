@@ -8,7 +8,8 @@
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="sections.css">
   <script src="wallpaper.js" defer></script>
-  <script src="sections.js" defer></script>
+  <script src="links-data.js" defer></script>
+  <script src="sections.js?v=20261124" defer></script>
 </head>
 <body class="subpage page-links" data-page="links">
   <video id="wallpaper" class="wallpaper" poster="media/links-poster.webp" data-video-src="media/links.mp4" muted loop playsinline preload="none" aria-hidden="true"></video>
@@ -17,7 +18,15 @@
   <header class="section-header">
     <div class="site-width section-nav">
       <a class="site-brand" href="index.html" aria-label="Agent-Kang 首页">Agent-Kang</a>
-      <nav aria-label="网站列表"><a href="blog.html">博客</a><a href="drive.html">网盘</a><a href="music.html">音乐</a><a href="sports.html">体育</a><a href="links.html" aria-current="page">网址集</a><a href="trending.html">今日热榜</a></nav>
+      <nav aria-label="网站列表">
+        <a href="index.html">主页</a>
+        <a href="blog.html">博客</a>
+        <a href="drive.html">网盘</a>
+        <a href="music.html">音乐</a>
+        <a href="sports.html">体育</a>
+        <a href="links.html" aria-current="page">网址集</a>
+        <a href="trending.html">今日热榜</a>
+      </nav>
     </div>
   </header>
 
@@ -35,7 +44,20 @@
         <div class="filters"><label class="visually-hidden" for="links-search">搜索网址</label>
           <input id="links-search" type="search" placeholder="搜索网址">
           <label class="visually-hidden" for="links-filter">筛选分类</label>
-          <select id="links-filter"><option value="">全部分类</option><option>开发</option><option>影音</option><option>资讯</option><option>其他</option></select></div>
+          <select id="links-filter">
+            <option value="">全部分类</option>
+            <option>AI 工具</option>
+            <option>学习办公</option>
+            <option>设计素材</option>
+            <option>体育分析</option>
+            <option>网络工具</option>
+            <option>自动化</option>
+            <option>开发</option>
+            <option>影音</option>
+            <option>资讯</option>
+            <option>其他</option>
+          </select>
+        </div>
         <div class="bookmark-grid" id="links-items" aria-live="polite"></div>
         <p class="helper" id="links-status" role="status"></p>
       </section>
@@ -44,7 +66,20 @@
           <h2 id="links-form-title">添加网址</h2>
           <label>名称<input name="title" type="text" required maxlength="80" autofocus></label>
           <label>网站地址<input name="url" type="url" placeholder="https://" required maxlength="1000"></label>
-          <label>分类<select name="category"><option>开发</option><option>影音</option><option>资讯</option><option>其他</option></select></label>
+          <label>分类
+            <select name="category">
+              <option>开发</option>
+              <option>AI 工具</option>
+              <option>学习办公</option>
+              <option>设计素材</option>
+              <option>体育分析</option>
+              <option>网络工具</option>
+              <option>自动化</option>
+              <option>影音</option>
+              <option>资讯</option>
+              <option>其他</option>
+            </select>
+          </label>
           <p id="links-form-error" class="helper" role="alert"></p>
           <div class="form-actions">
             <button class="pill" type="button" id="links-cancel">取消</button>
